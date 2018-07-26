@@ -18,7 +18,6 @@ const api = (function() {
   };
 
   const readDataOnServer = function(callback) {
-    console.log($.getJSON(`${BASE_URL}`, callback));
     $.getJSON(`${BASE_URL}`, callback);
   };
   // an id is created on the server
