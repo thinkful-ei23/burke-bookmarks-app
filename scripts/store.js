@@ -5,7 +5,7 @@
 const store = (function() {
   // the array of bookmark objects
   // *** clear dummyItems after you can create items in the DOM
-  const bookmarks = { items: [{name: 'dummyItem', rating : 2}, {name: 'dummyItem2', rating : 4}],
+  const bookmarks = { items: [],
     createFormOpen : false,
     filter : 0
   };
@@ -36,7 +36,8 @@ const store = (function() {
     bookmarks,
     addBookmark,
     deleteBookmark,
-    changeFilter
+    changeFilter,
+    findById
   };
 
 }());
