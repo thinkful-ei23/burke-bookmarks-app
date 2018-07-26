@@ -9,7 +9,9 @@ const bookmarkList = (function() {
   const handleFilterBar = function() {
     $('.js-filter-bar').change(() => {
       const filter = $(':selected').val();
-      console.log(filter);
+      const filterInt = parseInt(filter, 10);
+      store.changeFilter(filterInt);
+      console.log(store.bookmarks.filter);
     });
   };
 
@@ -67,7 +69,7 @@ const bookmarkList = (function() {
 
   // iterates through the bookmarks array and rendersBookmark for each element. Join the array into one long string. 
   const renderList = function() {
-    const htmlArray = store.bookmarks.map(element => renderBookmark(element));
+    const htmlArray = store.bookmarks.items.map(element => renderBookmark(element));
     return htmlArray.join('');
   };
 
