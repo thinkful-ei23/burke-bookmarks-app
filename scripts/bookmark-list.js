@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $ store*/
+/* global $ store cuid*/
 
 const bookmarkList = (function() {
   // need event handlers for everything the user can click on in the dom
@@ -16,7 +16,15 @@ const bookmarkList = (function() {
     });
   };
 
-  // event handler for the delete element button (set on the x button that is a part of the form)
+  // event handler for the delete element button (set on the ul)
+  const handleDeleteBookmark = function() {
+    $('.js-bookmark-list').on('click', '.js-delete', (e) => {
+      const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id');
+      console.log(bookmarkId);
+      store.deleteBookmark(bookmarkId);
+      render();
+    });
+  };
 
   // event handler for the expand bookmark feature (set on the ul)
 
@@ -66,11 +74,13 @@ const bookmarkList = (function() {
     // ***** HTML element here is a stand in for what the HTML will eventually look like
     return `
     <li>
-      <div class='inList bookmark'>
+      <div class='inList bookmark' id=${obj.id}>
         <span class="fas fa-caret-right"></span>
         <p>${obj.name}</p>
         ${renderRating(obj)}
-        <span class="fas fa-times"></span>
+        <button class='delete js-delete'>
+          <span class="fas fa-times"></span>
+        </button>
       </div>
     </li>
     `;
@@ -96,6 +106,7 @@ const bookmarkList = (function() {
 
   const bindEventListeners = function() {
     handleFilterBar();
+    handleDeleteBookmark();
   };
 
   return {
