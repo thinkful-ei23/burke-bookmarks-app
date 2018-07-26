@@ -16,12 +16,16 @@ const store = (function() {
     bookmarks.unshift(obj); // add new obj to beginning of array
   };
   // find by Id
-  const findById = function() {
-
+  const findById = function(id) {
+    return bookmarks.find(element => element.id === id);
   };
   // delete a bookmark
   const deleteBookmark = function(id) {
-
+    const bookmarkToDelete = findById(id);
+    console.log(bookmarkToDelete);
+    const indexOfBookmark = store.bookmarks.indexOf(bookmarkToDelete);
+    console.log(indexOfBookmark);
+    store.bookmarks.splice(indexOfBookmark, 1);
   };
 
   // the store will always have 
