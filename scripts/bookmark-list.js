@@ -72,9 +72,9 @@ const bookmarkList = (function() {
       const newBookmark = {title, url, description, rating, expanded: false};
       // ****** need to understand how servers set ids and how to grab them
       // send bookmark to server
-      api.sendBookmarkToServer(newBookmark, () => {
+      api.sendBookmarkToServer(newBookmark, (response) => {
         store.bookmarks.createFormOpen = false;
-        store.addBookmark(newBookmark);
+        store.addBookmark(response);
         render();
       });
     });
@@ -96,13 +96,13 @@ const bookmarkList = (function() {
                   </button>
                   <form id="js-add-bookmark-form">
                       <label for="bookmark-title-entry">Add a title</label>
-                      <input required type="text" name="bookmark-title-entry" class="js-bookmark-title-entry" value="facebook">
+                      <input required type="text" name="bookmark-title-entry" class="js-bookmark-title-entry">
                       <label for="bookmark-url-entry">Add a url</label>
                       <input required type="text" name="bookmark-url-entry" class="js-bookmark-url-entry" value="https://">
                       <label for="bookmark-description-entry">Add a description</label>
                       <input type="text" name="bookmark-description-entry" class="js-bookmark-description-entry">
                       <label for="bookmark-rating">Rate your bookmark</label>
-                      <input type="number" name="bookmark-rating" class="js-bookmark-rating-entry" min="1" max="5" value="5">
+                      <input type="number" name="bookmark-rating" class="js-bookmark-rating-entry" min="1" max="5" value="1">
                     <button type="submit">Add bookmark</button>
                   </form>
                 </div>
