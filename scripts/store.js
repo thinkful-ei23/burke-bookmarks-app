@@ -4,7 +4,6 @@
 
 const store = (function() {
   // the array of bookmark objects
-  // *** clear dummyItems after you can create items in the DOM
   const bookmarks = { items: [],
     createFormOpen : false,
     filter : 0
@@ -18,7 +17,6 @@ const store = (function() {
 
   // add a bookmark
   const addBookmark = function(obj) {
-    obj.id = cuid(); // give the bookmark a unique id
     bookmarks.items.unshift(obj); // add new obj to beginning of array
   };
   // find by Id
