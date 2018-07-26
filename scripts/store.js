@@ -17,7 +17,6 @@ const store = (function() {
 
   // add a bookmark
   const addBookmark = function(obj) {
-    obj.id = cuid(); // give the bookmark a unique id
     bookmarks.items.unshift(obj); // add new obj to beginning of array
   };
   // find by Id

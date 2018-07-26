@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $ store*/
+/* global $ store api cuid*/
 
 const bookmarkList = (function() {
 
@@ -18,8 +18,10 @@ const bookmarkList = (function() {
   const handleDeleteBookmark = function() {
     $('.js-bookmark-list').on('click', '.js-delete', (e) => {
       const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id');
-      store.deleteBookmark(bookmarkId);
-      render();
+      api.deleteDataOnServer(bookmarkId, () => {
+        store.deleteBookmark(bookmarkId);
+        render();
+      });
     });
   };
 
@@ -68,10 +70,13 @@ const bookmarkList = (function() {
       const description = $('.js-bookmark-description-entry').val();
       const rating = $('.js-bookmark-rating-entry').val();
       const newBookmark = {title, url, description, rating, expanded: false};
-      store.addBookmark(newBookmark);
-      // send to server as well
-      store.bookmarks.createFormOpen = false;
-      render();
+      // ****** need to understand how servers set ids and how to grab them
+      // send bookmark to server
+      api.sendBookmarkToServer(newBookmark, () => {
+        store.bookmarks.createFormOpen = false;
+        store.addBookmark(newBookmark);
+        render();
+      });
     });
   };
 
@@ -93,7 +98,7 @@ const bookmarkList = (function() {
                       <label for="bookmark-title-entry">Add a title</label>
                       <input required type="text" name="bookmark-title-entry" class="js-bookmark-title-entry" value="facebook">
                       <label for="bookmark-url-entry">Add a url</label>
-                      <input required type="text" name="bookmark-url-entry" class="js-bookmark-url-entry" value="facebook.com" placeholder="https://www.google.com">
+                      <input required type="text" name="bookmark-url-entry" class="js-bookmark-url-entry" value="https://">
                       <label for="bookmark-description-entry">Add a description</label>
                       <input type="text" name="bookmark-description-entry" class="js-bookmark-description-entry">
                       <label for="bookmark-rating">Rate your bookmark</label>
