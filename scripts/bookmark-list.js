@@ -14,13 +14,22 @@ const bookmarkList = (function() {
   // event handler for the delete element button (set on the x button that is a part of the form)
 
   // event handler for the expand bookmark feature (set on the ul)
-  const renderBookmark = function() {
-    console.log('going through each element');
+  const renderBookmark = function(obj) {
+    return `
+    <li>
+      <div class='inList bookmark'>${obj.name}</div>
+    </li>
+    `;
+  };
+
+  const renderList = function() {
+    const htmlArray = store.bookmarks.map(element => renderBookmark(element));
+    return htmlArray.join('');
   };
 
 
   const render = function() {
-    store.bookmarks.forEach(element => renderBookmark(element));
+    console.log(renderList());
   };
 
   return {
