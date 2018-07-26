@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $*/
+/* global $ cuid*/
 
 const store = (function() {
   // the array of bookmark objects
@@ -12,11 +12,15 @@ const store = (function() {
 
   // add a bookmark
   const addBookmark = function(obj) {
-    // add new obj to beginning of array
-    bookmarks.unshift(obj);
+    obj.id = cuid(); // give the bookmark a unique id
+    bookmarks.unshift(obj); // add new obj to beginning of array
+  };
+  // find by Id
+  const findById = function() {
+
   };
   // delete a bookmark
-  const deleteBookmark = function() {
+  const deleteBookmark = function(id) {
 
   };
 
