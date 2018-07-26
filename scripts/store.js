@@ -11,13 +11,14 @@ const store = (function() {
   let filter = 0;
 
   // add a bookmark
-  const addBookmark = function() {
-
-  }
+  const addBookmark = function(obj) {
+    // add new obj to beginning of array
+    bookmarks.unshift(obj);
+  };
   // delete a bookmark
   const deleteBookmark = function() {
 
-  }
+  };
 
   // the store will always have 
 
