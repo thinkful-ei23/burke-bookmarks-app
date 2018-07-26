@@ -5,6 +5,8 @@
 const store = (function() {
 
 
+  return {
 
-
+  };
+  
 }());

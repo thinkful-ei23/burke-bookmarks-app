@@ -5,6 +5,8 @@
 const bookmarkList = (function() {
 
 
+  return {
 
+  };
 
 }());
