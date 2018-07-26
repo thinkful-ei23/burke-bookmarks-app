@@ -6,6 +6,12 @@ const bookmarkList = (function() {
   // need event handlers for everything the user can click on in the dom
 
   // event handler for the drop down filter menu
+  const handleFilterBar = function() {
+    $('.js-filter-bar').change(() => {
+      const filter = $(':selected').val();
+      console.log(filter);
+    });
+  };
 
   // event handler for the delete element button (set on the x button that is a part of the form)
 
@@ -70,8 +76,13 @@ const bookmarkList = (function() {
     $( '.create-bookmark').after(renderList());
   };
 
+  const bindEventListeners = function() {
+    handleFilterBar();
+  };
+
   return {
-    render
+    render,
+    bindEventListeners
   };
 
 }());
