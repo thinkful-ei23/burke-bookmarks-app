@@ -1,9 +1,8 @@
 'use strict';
 
-/* global $ store cuid*/
+/* global $ store*/
 
 const bookmarkList = (function() {
-  // need event handlers for everything the user can click on in the dom
 
   // event handler for the drop down filter menu
   const handleFilterBar = function() {
@@ -11,22 +10,20 @@ const bookmarkList = (function() {
       const filter = $(':selected').val();
       const filterInt = parseInt(filter, 10);
       store.changeFilter(filterInt);
-      console.log(store.bookmarks.filter);
       render();
     });
   };
 
-  // event handler for the delete element button (set on the ul)
+  // event handler for the delete element button 
   const handleDeleteBookmark = function() {
     $('.js-bookmark-list').on('click', '.js-delete', (e) => {
       const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id');
-      console.log(bookmarkId);
       store.deleteBookmark(bookmarkId);
       render();
     });
   };
 
-  // event handler for the expand bookmark feature (set on the ul)
+  // event handler for the expand bookmark feature
   const handleExpandButton = function() {
     $('.js-bookmark-list').on('click', '.js-expand', (e) => {
       const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id'); 
@@ -49,7 +46,6 @@ const bookmarkList = (function() {
     $('.js-bookmark-list').on('click', '.create', (e) => {
       if (store.bookmarks.createFormOpen === false) {
         store.bookmarks.createFormOpen = true;
-        console.log(store.bookmarks.createFormOpen);
         render();
       }
     });
@@ -167,7 +163,7 @@ const bookmarkList = (function() {
     }
   };
 
-  // iterates through the bookmarks array and rendersBookmark for each element. Join the array into one long string. 
+  // iterates through the bookmarks array and renders bookmark for each element. Join the array into one long string. 
   const renderList = function() {
     if (store.bookmarks.filter > 0) {
       const htmlArray = store.bookmarks.items.filter(element => element.rating >= store.bookmarks.filter)
