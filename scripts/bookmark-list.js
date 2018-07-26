@@ -15,6 +15,7 @@ const bookmarkList = (function() {
 
   // event handler for the expand bookmark feature (set on the ul)
   const renderBookmark = function(obj) {
+    // ***** HTML element here is a stand in for what the HTML will eventually look like
     return `
     <li>
       <div class='inList bookmark'>${obj.name}</div>
@@ -27,9 +28,13 @@ const bookmarkList = (function() {
     return htmlArray.join('');
   };
 
+  // <li><div class='inList bookmark'>bookmark goes here</div></li>
+  // <li><div class='inList bookmark'>bookmark goes here</div></li>
+  // <li><div class='inList bookmark'>bookmark goes here</div></li>
+
 
   const render = function() {
-    console.log(renderList());
+    $( '.create-bookmark').after(renderList());
   };
 
   return {
