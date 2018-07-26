@@ -1,9 +1,10 @@
 'use strict';
 
-/* global $*/
+/* global $ bookmarkList*/
 
 
-$(() => {
+$(function() {
   // bind event listeners here
-  // render here
+  bookmarkList.bindEventListeners();
+  bookmarkList.render();
 });
