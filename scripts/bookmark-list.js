@@ -12,6 +12,7 @@ const bookmarkList = (function() {
       const filterInt = parseInt(filter, 10);
       store.changeFilter(filterInt);
       console.log(store.bookmarks.filter);
+      render();
     });
   };
 
@@ -26,7 +27,15 @@ const bookmarkList = (function() {
   // event handler for the submit on the create element form
 
   // render each bookmark element
-
+  const renderCreateForm = function() {
+    if (store.bookmarks.createFormOpen === false) {
+      return `<li>
+                <div class='create inList'>
+                <p>Create bookmark</p>
+                </div>
+              </li>`;
+    }
+  };
   // render an individual heart rating
   const renderHeart = function(bool) {
     if (bool === true) {
@@ -69,13 +78,20 @@ const bookmarkList = (function() {
 
   // iterates through the bookmarks array and rendersBookmark for each element. Join the array into one long string. 
   const renderList = function() {
-    const htmlArray = store.bookmarks.items.map(element => renderBookmark(element));
-    return htmlArray.join('');
+    if (store.bookmarks.filter > 0) {
+      const htmlArray = store.bookmarks.items.filter(element => element.rating >= store.bookmarks.filter)
+        .map(element => renderBookmark(element));
+      return htmlArray.join('');
+    } else {
+      const htmlArray = store.bookmarks.items.map(element => renderBookmark(element));
+      return htmlArray.join('');
+    }
   };
 
   // append the bookmark list after the create bookmark item, which always stays at the top of the list
   const render = function() {
-    $( '.create-bookmark').after(renderList());
+    $('.bookmark-list').html(renderList());
+    $('.bookmark-list').prepend(renderCreateForm());
   };
 
   const bindEventListeners = function() {
