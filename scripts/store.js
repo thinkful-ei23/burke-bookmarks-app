@@ -5,7 +5,7 @@
 const store = (function() {
   // the array of bookmark objects
   // *** clear dummyItems after you can create items in the DOM
-  const bookmarks = [{name: 'dummyItem'}, {name: 'dummyItem2'}];
+  const bookmarks = [{name: 'dummyItem', rating : 2}, {name: 'dummyItem2', rating : 4}];
   // whether or not the create bookmark form is open
   let createFormOpen = false;
   // filter the results by 0 - 5. 0 does not filter any bookmarks. 2 filters by 2 or greater. 3 filters by 3 or greater, etc.

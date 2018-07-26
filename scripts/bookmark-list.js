@@ -19,7 +19,7 @@ const bookmarkList = (function() {
 
   // render each bookmark element
 
-
+  // render an individual heart rating
   const renderHeart = function(bool) {
     if (bool === true) {
       // return full heart
@@ -44,6 +44,7 @@ const bookmarkList = (function() {
     }
     return heartArray.join('');
   };
+
   const renderBookmark = function(obj) {
     // ***** HTML element here is a stand in for what the HTML will eventually look like
     return `
@@ -51,6 +52,7 @@ const bookmarkList = (function() {
       <div class='inList bookmark'>
         <span class="fas fa-caret-right"></span>
         <p>${obj.name}</p>
+        ${renderRating(obj)}
         <span class="fas fa-times"></span>
       </div>
     </li>
