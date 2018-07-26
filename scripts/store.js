@@ -22,13 +22,9 @@ const store = (function() {
   // delete a bookmark
   const deleteBookmark = function(id) {
     const bookmarkToDelete = findById(id);
-    console.log(bookmarkToDelete);
     const indexOfBookmark = store.bookmarks.indexOf(bookmarkToDelete);
-    console.log(indexOfBookmark);
     store.bookmarks.splice(indexOfBookmark, 1);
   };
-
-  // the store will always have 
 
   return {
     bookmarks,
