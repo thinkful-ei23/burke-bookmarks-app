@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $ store api cuid*/
+/* global $ store api Bookmark*/
 
 const bookmarkList = (function() {
 
@@ -69,8 +69,7 @@ const bookmarkList = (function() {
       const url = $('.js-bookmark-url-entry').val();
       const description = $('.js-bookmark-description-entry').val();
       const rating = $('.js-bookmark-rating-entry').val();
-      const newBookmark = {title, url, description, rating, expanded: false};
-      // ****** need to understand how servers set ids and how to grab them
+      const newBookmark = Bookmark.create(title, url, description, rating); 
       // send bookmark to server
       api.sendBookmarkToServer(newBookmark, (response) => {
         store.bookmarks.createFormOpen = false;
