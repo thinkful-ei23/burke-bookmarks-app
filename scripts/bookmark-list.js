@@ -116,6 +116,38 @@ const bookmarkList = (function() {
     });
   };
 
+  // handle the 
+  const handleEditableDesc = function() {
+    $('main').on('keydown', '.desc',  function(event) {
+      if (event.which === 13) {
+        event.preventDefault();
+        const newDesc = $(event.currentTarget).text();
+        const bookmarkID = $(event.currentTarget).closest('.expanded').attr('id');
+        const descData = { desc: newDesc };
+        api.updateDataOnServer(bookmarkID, descData, (success) => {
+          store.editDesc(bookmarkID, newDesc);
+          render();
+        }, (error) => {
+          store.bookmarks.error = error.responseJSON.message;
+          render();
+        });
+      }
+    });
+    $('main').on('blur', '.desc',  function(event) {
+      const newDesc = $(event.currentTarget).text();
+      const index = $(event.currentTarget).closest('.expanded').attr('id');
+      const bookmarkID = $(event.currentTarget).closest('.expanded').attr('id');
+      const descData = { desc: newDesc };
+      api.updateDataOnServer(bookmarkID, descData, (success) => {
+        store.editDesc(bookmarkID, newDesc);
+        render();
+      }, (error) => {
+        store.bookmarks.error = error.responseJSON.message;
+        render();
+      });
+    });
+  };
+
   // render each bookmark element
   const renderCreateForm = function() {
     if (store.bookmarks.createFormOpen === false) {
@@ -193,8 +225,8 @@ const bookmarkList = (function() {
                   </button>
                   <p class="bookmark-title">${obj.title}</p>
                   ${renderRating(obj)}
-                  <p class="desc">Description:</p>
-                  <p class="desc">${obj.desc}</p>
+                  <p class ="aligned" >Description:</p>
+                  <p contenteditable="true" class="desc aligned">${obj.desc}</p>
                   <a href='${obj.url}'>Visit this site</a>
                   <button aria-label="Delete bookmark" class='delete js-delete'>
                     <span class="fas fa-times"></span>
@@ -257,6 +289,7 @@ const bookmarkList = (function() {
     handleRevertButton();
     handleHearts();
     handleCloseError();
+    handleEditableDesc();
   };
 
   return {

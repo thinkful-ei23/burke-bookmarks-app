@@ -36,13 +36,19 @@ const store = (function() {
     bookmarkToEdit.rating = rating;
   };
 
+  const editDesc = function(id, desc) {
+    const bookmarkToEdit = findById(id);
+    bookmarkToEdit.desc = desc;
+  };
+
   return {
     bookmarks,
     addBookmark,
     deleteBookmark,
     changeFilter,
     findById,
-    editRating
+    editRating,
+    editDesc
   };
 
 }());

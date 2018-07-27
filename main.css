@@ -28,9 +28,9 @@ button:focus {
     background: #9fb7d4;
 }
 
-button:focus {
-    outline: 1px solid #fff;
-    outline-offset: -4px;
+span:hover,
+span:focus {
+    color: #9fb7d4;
 }
 
 button:active {
@@ -60,8 +60,13 @@ input, label, .submit {
   /* height: 200px;
   width: 400px;*/
   border: 1px solid black;
+  border-bottom: 0;
   background-color: white;
   padding: 1%;
+}
+
+li:last-child {
+  border-bottom: 1px solid black;
 }
 
 li {
@@ -121,9 +126,11 @@ ul {
   width: 15%;
   margin-left: 0;
 }
+.aligned {
+  margin-left: 10%;
+}
 
 .desc {
-  margin-left: 10%;
   margin-top: 0;
 }
 
