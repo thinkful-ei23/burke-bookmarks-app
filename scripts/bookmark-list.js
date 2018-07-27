@@ -80,6 +80,15 @@ const bookmarkList = (function() {
     });
   };
 
+  // handle every heart on the page, making them all editable
+  const handleHearts = function() {
+    $('.js-bookmark-list').on('click', '.fa-heart', (e) => {
+      const classNames = $(e.currentTarget).attr('class');
+      console.log(classNames);
+      //render();
+    });
+  };
+
   // render each bookmark element
   const renderCreateForm = function() {
     if (store.bookmarks.createFormOpen === false) {
@@ -119,13 +128,13 @@ const bookmarkList = (function() {
   };
 
   // render an individual heart rating
-  const renderHeart = function(bool) {
+  const renderHeart = function(bool, index) {
     if (bool === true) {
       // return full heart
-      return '<span class="fas fa-heart"></span>';
+      return `<span class="fas fa-heart ${index}"></span>`;
     } else {
       // return empty heart
-      return '<span class="far fa-heart"></span>';
+      return `<span class="far fa-heart ${index}"></span>`;
     }
   };
 
@@ -134,12 +143,14 @@ const bookmarkList = (function() {
     const rating = obj.rating;
     const heartArray = [`<div class="heartBar" aria-label='${rating} hearts out of 5'>`];
     // push the amount of hearts = rating
+    let fullHeartsPushed = 0;
     for (let i = 0; i < rating; i++) {
-      heartArray.push(renderHeart(true));
+      heartArray.push(renderHeart(true, i));
+      fullHeartsPushed++;
     }
     // push the amount of empty hearts afterwards
-    for (let i = 0; i < (5 - rating); i++) {
-      heartArray.push(renderHeart(false));
+    for (let i = fullHeartsPushed; i < 5; i++) {
+      heartArray.push(renderHeart(false, i));
     }
     heartArray.push('</div>');
     return heartArray.join('');
@@ -204,6 +215,7 @@ const bookmarkList = (function() {
     handleSubmitButton();
     handleExpandButton();
     handleRevertButton();
+    handleHearts();
   };
 
   return {
