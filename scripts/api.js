@@ -12,9 +12,7 @@ const api = (function() {
       url: `${BASE_URL}`,
       method: 'POST',
       contentType : 'application/json', 
-      // ************ changed data
-      data: 'foo',
-      // data : bookmarkJSON,
+      data: bookmarkJSON,
       success : success,
       error : error
     });

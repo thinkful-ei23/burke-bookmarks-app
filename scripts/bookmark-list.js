@@ -79,7 +79,6 @@ const bookmarkList = (function() {
       const url = $('.js-bookmark-url-entry').val();
       const description = $('.js-bookmark-description-entry').val();
       const rating = $('.js-bookmark-rating-entry').val();
-      console.log(description);
       const newBookmark = Bookmark.create(title, url, description, rating); 
       // send bookmark to server
       api.sendBookmarkToServer(newBookmark, (success) => {
@@ -100,12 +99,13 @@ const bookmarkList = (function() {
     $('.js-bookmark-list').on('click', '.fa-heart', (e) => {
       const classNames = $(e.currentTarget).attr('class');
       const classArray = classNames.split(' ');
-      const indexOfHeart = classArray.pop();
+      const indexOfHeart = parseInt(classArray.pop(), 10);
       // grab element that that's on and change rating
       const bookmarkID = $(e.currentTarget).parents('.bookmark').attr('id');
       const bookmark = store.findById(bookmarkID);
-      console.log(bookmark);
-      //render();
+      bookmark.rating = indexOfHeart + 1;
+      // need to update server data next
+      render();
     });
   };
 
