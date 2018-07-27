@@ -21,8 +21,6 @@ const api = (function() {
   const readDataOnServer = function(callback) {
     $.getJSON(`${BASE_URL}`, callback);
   };
-  // an id is created on the server
-  // need to read that id
   const deleteDataOnServer = function(id, callback) {
     $.ajax({
       url: `${BASE_URL}/${id}`,

@@ -18,7 +18,7 @@ const bookmarkList = (function() {
   const handleDeleteBookmark = function() {
     $('.js-bookmark-list').on('click', '.js-delete', (e) => {
       const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id');
-      api.deleteDataOnServer(bookmarkId, (success) => {
+      api.deleteDataOnServer(bookmarkId, () => {
         store.deleteBookmark(bookmarkId);
         render();
       });
@@ -30,7 +30,6 @@ const bookmarkList = (function() {
   const handleCloseError = function() {
     $('main').on('click', '.js-close-error', () => {
       store.bookmarks.error = '';
-      console.log(store.bookmarks.error);
       render();
     });
   };
@@ -137,7 +136,6 @@ const bookmarkList = (function() {
     });
     $('main').on('blur', '.desc',  function(event) {
       const newDesc = $(event.currentTarget).text();
-      const index = $(event.currentTarget).closest('.expanded').attr('id');
       const bookmarkID = $(event.currentTarget).closest('.expanded').attr('id');
       const descData = { desc: newDesc };
       api.updateDataOnServer(bookmarkID, descData, (success) => {

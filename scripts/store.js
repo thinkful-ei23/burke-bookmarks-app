@@ -3,7 +3,7 @@
 /* global $ cuid*/
 
 const store = (function() {
-  // the array of bookmark objects
+
   const bookmarks = { items: [],
     createFormOpen : false,
     filter : 0,
@@ -20,10 +20,12 @@ const store = (function() {
   const addBookmark = function(obj) {
     bookmarks.items.unshift(obj); // add new obj to beginning of array
   };
+
   // find by Id
   const findById = function(id) {
     return bookmarks.items.find(element => element.id === id);
   };
+  
   // delete a bookmark
   const deleteBookmark = function(id) {
     const bookmarkToDelete = findById(id);
