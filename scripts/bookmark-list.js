@@ -276,7 +276,6 @@ const bookmarkList = (function() {
     }
     $('.bookmark-list').html(renderList());
     $('.bookmark-list').prepend(renderCreateForm());
-    
   };
 
   const bindEventListeners = function() {

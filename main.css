@@ -14,6 +14,20 @@ textarea {
   margin: 0; /* 2 */
 }
 
+button {
+  background-color: white;
+  border: 0;
+}
+
+.submit {
+  border: 2px solid #9fb7d4;
+  border-radius: 6px; 
+}
+
+a {
+  color : #0a54af;
+}
+
 .delete, .expand, .retract {
   background-color: white;
   border: none;
