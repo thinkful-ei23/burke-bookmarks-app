@@ -1,6 +1,6 @@
 'use strict';
  
-const Bookmark = (function() {
+const bookmark = (function() {
 
   const create = function(title, url, description, rating) {
     return {
