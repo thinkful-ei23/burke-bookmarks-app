@@ -1,6 +1,6 @@
 'use strict';
 
-/* global $ store api Bookmark*/
+/* global $ store api bookmark*/
 
 const bookmarkList = (function() {
 
@@ -80,7 +80,7 @@ const bookmarkList = (function() {
       const url = $('.js-bookmark-url-entry').val();
       const description = $('.js-bookmark-description-entry').val();
       const rating = $('.js-bookmark-rating-entry').val();
-      const newBookmark = Bookmark.create(title, url, description, rating); 
+      const newBookmark = bookmark.create(title, url, description, rating); 
       // send bookmark to server
       api.sendBookmarkToServer(newBookmark, (response) => {
         store.bookmarks.createFormOpen = false;
