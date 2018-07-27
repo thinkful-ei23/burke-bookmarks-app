@@ -25,7 +25,7 @@ const bookmarkList = (function() {
     });
   };
 
-  // handle close error
+  // handle close error button
 
   const handleCloseError = function() {
     $('main').on('click', '.js-close-error', () => {
@@ -45,6 +45,7 @@ const bookmarkList = (function() {
     });
   };
 
+  // handle button to close expanded bookmark
   const handleRevertButton = function() {
     $('.js-bookmark-list').on('click', '.js-retract', (e) => {
       const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id'); 
@@ -53,6 +54,7 @@ const bookmarkList = (function() {
       render();
     });
   };
+
   // event handler for the create element button (set on the create button itself)
   const handleCreateButton = function() {
     $('.js-bookmark-list').on('click', '.create', (e) => {
@@ -81,9 +83,9 @@ const bookmarkList = (function() {
       const rating = $('.js-bookmark-rating-entry').val();
       const newBookmark = Bookmark.create(title, url, description, rating); 
       // send bookmark to server
-      api.sendBookmarkToServer(newBookmark, (success) => {
+      api.sendBookmarkToServer(newBookmark, (response) => {
         store.bookmarks.createFormOpen = false;
-        store.addBookmark(success);
+        store.addBookmark(response);
         render();
       }, 
       (error) => {
@@ -116,7 +118,7 @@ const bookmarkList = (function() {
     });
   };
 
-  // handle the 
+  // handle the editable description
   const handleEditableDesc = function() {
     $('main').on('keydown', '.desc',  function(event) {
       if (event.which === 13) {
@@ -216,7 +218,6 @@ const bookmarkList = (function() {
   };
 
   const renderBookmark = function(obj) {
-    // ***** HTML element here is a stand in for what the HTML will eventually look like
     if (obj.expanded === true) {
       return ` <li>
                 <div class='inList bookmark expanded' id=${obj.id}>
@@ -225,7 +226,7 @@ const bookmarkList = (function() {
                   </button>
                   <p class="bookmark-title">${obj.title}</p>
                   ${renderRating(obj)}
-                  <p class ="aligned" >Description:</p>
+                  <p class ="aligned">Description:</p>
                   <p contenteditable="true" class="desc aligned">${obj.desc}</p>
                   <a href='${obj.url}'>Visit this site</a>
                   <button aria-label="Delete bookmark" class='delete js-delete'>
@@ -238,13 +239,12 @@ const bookmarkList = (function() {
                 <div class='inList bookmark' id=${obj.id}>
                     <button aria-label="Expand bookmark" class='expand js-expand'><span class="fas fa-caret-right"></span></button>
                     <p class="bookmark-title">${obj.title}</p>
-                  ${renderRating(obj)}
-                  <button aria-label="Delete bookmark" class='delete js-delete'>
-                    <span class="fas fa-times"></span>
-                  </button>
+                    ${renderRating(obj)}
+                    <button aria-label="Delete bookmark" class='delete js-delete'>
+                      <span class="fas fa-times"></span>
+                    </button>
                 </div>
-              </li>
-    `;
+              </li>`;
     }
   };
 
