@@ -25,6 +25,16 @@ const bookmarkList = (function() {
     });
   };
 
+  // handle close error
+
+  const handleCloseError = function() {
+    $('main').on('click', '.js-close-error', () => {
+      store.bookmarks.error = '';
+      console.log(store.bookmarks.error);
+      render();
+    });
+  };
+
   // event handler for the expand bookmark feature
   const handleExpandButton = function() {
     $('.js-bookmark-list').on('click', '.js-expand', (e) => {
@@ -213,7 +223,7 @@ const bookmarkList = (function() {
 
   const renderError = function() {
     return `<div class='error'><p>${store.bookmarks.error}</p>
-    <button aria-label="Close error message" class='delete js-delete'> 
+    <button aria-label="Close error message" class='js-close-error'> 
       <span class="fas fa-times"></span>
     </button></div>`;
   };
@@ -222,6 +232,8 @@ const bookmarkList = (function() {
   const render = function() {
     if (store.bookmarks.error) {
       $('main').prepend(renderError());
+    } else {
+      $('.error').detach();
     }
     $('.bookmark-list').html(renderList());
     $('.bookmark-list').prepend(renderCreateForm());
@@ -237,6 +249,7 @@ const bookmarkList = (function() {
     handleExpandButton();
     handleRevertButton();
     handleHearts();
+    handleCloseError();
   };
 
   return {

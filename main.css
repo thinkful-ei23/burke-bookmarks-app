@@ -147,6 +147,7 @@ ul {
   position: absolute;
   top: 2px;
   right: 2px;
+  border: 0;
 }
 
 .error button:hover,
