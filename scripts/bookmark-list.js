@@ -97,15 +97,22 @@ const bookmarkList = (function() {
   // handle every heart on the page, making them all editable
   const handleHearts = function() {
     $('.js-bookmark-list').on('click', '.fa-heart', (e) => {
+      // grab element that the heart's on 
       const classNames = $(e.currentTarget).attr('class');
       const classArray = classNames.split(' ');
       const indexOfHeart = parseInt(classArray.pop(), 10);
-      // grab element that that's on and change rating
       const bookmarkID = $(e.currentTarget).parents('.bookmark').attr('id');
-      const bookmark = store.findById(bookmarkID);
-      bookmark.rating = indexOfHeart + 1;
-      // need to update server data next
-      render();
+      // set up new values
+      const newRating = indexOfHeart + 1;
+      const ratingData = { rating : newRating };
+      // need to update server and store
+      api.updateDataOnServer(bookmarkID, ratingData, (success) => {
+        store.editRating(bookmarkID, newRating);
+        render();
+      }, (error) => {
+        store.bookmarks.error = error.responseJSON.message;
+        render();
+      });
     });
   };
 

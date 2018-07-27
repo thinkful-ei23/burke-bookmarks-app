@@ -31,10 +31,24 @@ const api = (function() {
     });
   };
 
+  const updateDataOnServer = function(id, data, success, error) {
+    const newDataJSON = JSON.stringify(data);
+    console.log(newDataJSON);
+    $.ajax({
+      url: `${BASE_URL}/${id}`,
+      contentType : 'application/json',
+      method: 'PATCH', 
+      data : newDataJSON,
+      success : success,
+      error : error,
+    });
+  };
+
   return {
     sendBookmarkToServer,
     readDataOnServer,
-    deleteDataOnServer
+    deleteDataOnServer,
+    updateDataOnServer
   };
 
 }());

@@ -31,12 +31,18 @@ const store = (function() {
     store.bookmarks.items.splice(indexOfBookmark, 1);
   };
 
+  const editRating = function(id, rating) {
+    const bookmarkToEdit = findById(id);
+    bookmarkToEdit.rating = rating;
+  };
+
   return {
     bookmarks,
     addBookmark,
     deleteBookmark,
     changeFilter,
-    findById
+    findById,
+    editRating
   };
 
 }());
