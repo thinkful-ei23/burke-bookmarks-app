@@ -47,6 +47,10 @@ input, label, .submit {
   margin-bottom: 0;
 }
 
+.expanded.bookmark {
+  padding-bottom: 5%;
+}
+
 .expanded a {
   margin-left: 10%;
   margin-bottom: 1em;
@@ -103,7 +107,7 @@ ul {
 .heartBar {
   display: inline-block;
   position: relative;
-  left: 28%;
+  left: 20%;
 }
 /* display inline block */
 
@@ -133,5 +137,9 @@ ul {
   }
   .bookmark-title {
     left: 10%;
+  }
+
+  .heartBar {
+    left: 28%;
   }
 }
