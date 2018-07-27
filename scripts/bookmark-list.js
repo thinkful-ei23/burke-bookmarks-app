@@ -18,7 +18,7 @@ const bookmarkList = (function() {
   const handleDeleteBookmark = function() {
     $('.js-bookmark-list').on('click', '.js-delete', (e) => {
       const bookmarkId = $(e.currentTarget).closest('.bookmark').attr('id');
-      api.deleteDataOnServer(bookmarkId, () => {
+      api.deleteDataOnServer(bookmarkId, (success) => {
         store.deleteBookmark(bookmarkId);
         render();
       });
@@ -72,11 +72,16 @@ const bookmarkList = (function() {
       console.log(description);
       const newBookmark = Bookmark.create(title, url, description, rating); 
       // send bookmark to server
-      api.sendBookmarkToServer(newBookmark, (response) => {
+      api.sendBookmarkToServer(newBookmark, (success) => {
         store.bookmarks.createFormOpen = false;
-        store.addBookmark(response);
+        store.addBookmark(success);
         render();
-      });
+      }, 
+      (error) => {
+        store.bookmarks.error = error.responseJSON.message;
+        render();
+      }
+      );
     });
   };
 
@@ -84,7 +89,12 @@ const bookmarkList = (function() {
   const handleHearts = function() {
     $('.js-bookmark-list').on('click', '.fa-heart', (e) => {
       const classNames = $(e.currentTarget).attr('class');
-      console.log(classNames);
+      const classArray = classNames.split(' ');
+      const indexOfHeart = classArray.pop();
+      // grab element that that's on and change rating
+      const bookmarkID = $(e.currentTarget).parents('.bookmark').attr('id');
+      const bookmark = store.findById(bookmarkID);
+      console.log(bookmark);
       //render();
     });
   };
@@ -201,10 +211,21 @@ const bookmarkList = (function() {
     }
   };
 
+  const renderError = function() {
+    return `<div class='error'><p>${store.bookmarks.error}</p>
+    <button aria-label="Close error message" class='delete js-delete'> 
+      <span class="fas fa-times"></span>
+    </button></div>`;
+  };
+
   // append the bookmark list after the create bookmark item, which always stays at the top of the list
   const render = function() {
+    if (store.bookmarks.error) {
+      $('main').prepend(renderError());
+    }
     $('.bookmark-list').html(renderList());
     $('.bookmark-list').prepend(renderCreateForm());
+    
   };
 
   const bindEventListeners = function() {

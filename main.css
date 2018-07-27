@@ -131,6 +131,38 @@ ul {
   width: 50%;
 }
 
+.error {
+  background-color: red;
+  border: 1px solid black;
+  margin-bottom: 5%;
+  position: relative;
+}
+
+.error p {
+  margin-left: 3%;
+}
+
+.error button {
+  background-color: red;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.error button:hover,
+.error button:focus {
+    background: #ffd0d0;
+}
+
+.error button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.error button:active {
+    transform: scale(0.99);
+}
+
 @media only screen and (min-width: 640px) {
   main {
     width: 40%;

@@ -12,8 +12,6 @@ const Bookmark = (function() {
     };
   };
 
-
-
   return {
     create
   };

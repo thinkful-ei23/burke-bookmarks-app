@@ -6,15 +6,18 @@ const api = (function() {
 
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/burke/bookmarks';
 
-  const sendBookmarkToServer = function(newBookmark, callback) {
+  const sendBookmarkToServer = function(newBookmark, success, error) {
     const bookmarkJSON = JSON.stringify(newBookmark);
     $.ajax({
       url: `${BASE_URL}`,
       method: 'POST',
       contentType : 'application/json', 
-      data : bookmarkJSON,
-      success : callback
-    }, callback);
+      // ************ changed data
+      data: 'foo',
+      // data : bookmarkJSON,
+      success : success,
+      error : error
+    });
   };
 
   const readDataOnServer = function(callback) {
@@ -26,8 +29,8 @@ const api = (function() {
     $.ajax({
       url: `${BASE_URL}/${id}`,
       method: 'DELETE', 
-      success : callback
-    }, callback);
+      success : callback,
+    });
   };
 
   return {
