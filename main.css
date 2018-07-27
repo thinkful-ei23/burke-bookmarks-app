@@ -86,7 +86,7 @@ header {
 main {
   margin-left: auto;
   margin-right: auto;
-  width: 40%;
+  width: 90%;
 }
 
 ul {
@@ -114,7 +114,6 @@ ul {
 .bookmark-title {
   display: inline-block;
   position: relative;
-  left: 15%;
   width: 15%;
   margin-left: 0;
 }
@@ -122,4 +121,17 @@ ul {
 .desc {
   margin-left: 10%;
   margin-top: 0;
+}
+
+#filter-bar {
+  width: 50%;
+}
+
+@media only screen and (min-width: 640px) {
+  main {
+    width: 40%;
+  }
+  .bookmark-title {
+    left: 15%;
+  }
 }

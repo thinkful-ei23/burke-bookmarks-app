@@ -148,7 +148,7 @@ const bookmarkList = (function() {
   const renderBookmark = function(obj) {
     // ***** HTML element here is a stand in for what the HTML will eventually look like
     if (obj.expanded === true) {
-      return `<li>
+      return ` <li>
                 <div class='inList bookmark expanded' id=${obj.id}>
                   <button aria-label="Condense bookmark" class='retract js-retract'>
                       <span class="fas fa-caret-down"></span>
