@@ -69,6 +69,7 @@ const bookmarkList = (function() {
       const url = $('.js-bookmark-url-entry').val();
       const description = $('.js-bookmark-description-entry').val();
       const rating = $('.js-bookmark-rating-entry').val();
+      console.log(description);
       const newBookmark = Bookmark.create(title, url, description, rating); 
       // send bookmark to server
       api.sendBookmarkToServer(newBookmark, (response) => {
@@ -84,25 +85,33 @@ const bookmarkList = (function() {
     if (store.bookmarks.createFormOpen === false) {
       return `<li>
                 <button class='create inList'>
-                <p>Create bookmark</p>
+                  <p>Create bookmark</p>
                 </button>
               </li>`;
     } else {
       return `<li>
                 <div class="inList">
-                  <button class="js-revert-extended">
+                  <button aria-label="Close create bookmark form" class="js-revert-extended">
                     <span class="fas fa-caret-down"></span>
                   </button>
                   <form id="js-add-bookmark-form">
-                      <label for="bookmark-title-entry">Add a title</label>
+                    <div>
+                      <label for="bookmark-title-entry">Add a title:</label>
                       <input required type="text" name="bookmark-title-entry" class="js-bookmark-title-entry">
-                      <label for="bookmark-url-entry">Add a url</label>
-                      <input required type="text" name="bookmark-url-entry" class="js-bookmark-url-entry" value="https://">
-                      <label for="bookmark-description-entry">Add a description</label>
+                    </div>
+                    <div>
+                      <label for="bookmark-url-entry">Add a url:</label>
+                      <input required type="url" name="bookmark-url-entry" class="js-bookmark-url-entry" placeholder="https://">
+                    </div>
+                    <div>
+                      <label for="bookmark-description-entry">Add a description:</label>
                       <input type="text" name="bookmark-description-entry" class="js-bookmark-description-entry">
-                      <label for="bookmark-rating">Rate your bookmark</label>
+                    </div>
+                    <div>
+                      <label for="bookmark-rating">Rate your bookmark:</label>
                       <input type="number" name="bookmark-rating" class="js-bookmark-rating-entry" min="1" max="5" value="1">
-                    <button type="submit">Add bookmark</button>
+                    </div>
+                    <button class="submit" type="submit">Add bookmark</button>
                   </form>
                 </div>
               </li>`;
@@ -113,17 +122,17 @@ const bookmarkList = (function() {
   const renderHeart = function(bool) {
     if (bool === true) {
       // return full heart
-      return '<span class="fas fa-heart"></i>';
+      return '<span class="fas fa-heart"></span>';
     } else {
       // return empty heart
-      return '<span class="far fa-heart"></i>';
+      return '<span class="far fa-heart"></span>';
     }
   };
 
   // returns the list of html elements that show that element's rating
   const renderRating = function(obj) {
     const rating = obj.rating;
-    const heartArray = [];
+    const heartArray = [`<div class="heartBar" aria-label='${rating} hearts out of 5'>`];
     // push the amount of hearts = rating
     for (let i = 0; i < rating; i++) {
       heartArray.push(renderHeart(true));
@@ -132,6 +141,7 @@ const bookmarkList = (function() {
     for (let i = 0; i < (5 - rating); i++) {
       heartArray.push(renderHeart(false));
     }
+    heartArray.push('</div>');
     return heartArray.join('');
   };
 
@@ -139,26 +149,27 @@ const bookmarkList = (function() {
     // ***** HTML element here is a stand in for what the HTML will eventually look like
     if (obj.expanded === true) {
       return `<li>
-                <div class='inList bookmark' id=${obj.id}>
-                <button class='retract js-retract'>
-                  <span class="fas fa-caret-down"></span>
-                </button>
-                <p>${obj.title}</p>
-                <p>${obj.description}</p>
-                <a href='${obj.url}'>Visit this bookmark</a>
-                ${renderRating(obj)}
-                <button class='delete js-delete'>
-                  <span class="fas fa-times"></span>
-                </button>
-              </div>
-            </li>`;
+                <div class='inList bookmark expanded' id=${obj.id}>
+                  <button aria-label="Condense bookmark" class='retract js-retract'>
+                      <span class="fas fa-caret-down"></span>
+                  </button>
+                  <p class="bookmark-title">${obj.title}</p>
+                  ${renderRating(obj)}
+                  <p class="desc">Description:</p>
+                  <p class="desc">${obj.desc}</p>
+                  <a href='${obj.url}'>Visit this site</a>
+                  <button aria-label="Delete bookmark" class='delete js-delete'>
+                    <span class="fas fa-times"></span>
+                  </button>
+                </div>
+              </li>`;
     } else {
       return `<li>
                 <div class='inList bookmark' id=${obj.id}>
-                  <button class='expand js-expand'><span class="fas fa-caret-right"></span></button>
-                  <p>${obj.title}</p>
+                    <button aria-label="Expand bookmark" class='expand js-expand'><span class="fas fa-caret-right"></span></button>
+                    <p class="bookmark-title">${obj.title}</p>
                   ${renderRating(obj)}
-                  <button class='delete js-delete'>
+                  <button aria-label="Delete bookmark" class='delete js-delete'>
                     <span class="fas fa-times"></span>
                   </button>
                 </div>

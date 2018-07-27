@@ -1,5 +1,125 @@
+html {
+  background-color: #8cdde8;
+  font-family: 'Merriweather', serif;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+.delete, .expand, .retract {
+  background-color: white;
+  border: none;
+}
+
+.condense, .expand, .retract {
+  margin-left: 10%;
+}
+
+button:hover,
+button:focus {
+    background: #9fb7d4;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+
+input, label, .submit {
+  margin: 1%;
+}
+
+.retract p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.expanded a {
+  margin-left: 10%;
+  margin-bottom: 1em;
+}
+
 .inList {
   /* height: 200px;
   width: 400px;*/
   border: 1px solid black;
+  background-color: white;
+  padding: 1%;
+}
+
+li {
+  list-style: none;
+  position: relative;
+}
+
+button.create {
+  width: 100%;
+}
+
+.delete {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+header {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+  height: 100px;
+}
+
+
+main {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.filter-bar {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.heartBar {
+  display: inline-block;
+  position: relative;
+  left: 28%;
+}
+/* display inline block */
+
+.expand {
+  display: inline-block;
+}
+
+.bookmark-title {
+  display: inline-block;
+  position: relative;
+  left: 15%;
+  width: 15%;
+  margin-left: 0;
+}
+
+.desc {
+  margin-left: 10%;
+  margin-top: 0;
 }

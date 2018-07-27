@@ -6,11 +6,11 @@ const Bookmark = (function() {
     return {
       title: title,
       url : url, 
-      description : description,
+      desc : description,
       rating : rating, 
       expanded : false
     };
-  }
+  };
 
 
 
